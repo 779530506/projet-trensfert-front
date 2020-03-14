@@ -1,3 +1,4 @@
+import { InterceptorService } from './helper/interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +11,9 @@ import { GestionUserComponent } from './components/gestion-user/gestion-user.com
 import { ConnexionComponent } from './components/connexion/connexion.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ListeUserComponent } from './page/liste-user/liste-user.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +24,17 @@ import { HttpClientModule } from '@angular/common/http';
     GestionUserComponent,
     ConnexionComponent,
     ListUserComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    ListeUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-  
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })
