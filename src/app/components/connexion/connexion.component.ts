@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from 'src/app/service/authentification.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,13 +10,14 @@ import { Router } from '@angular/router';
 })
 export class ConnexionComponent implements OnInit {
   formUser: FormGroup;
+  error: string;
 
   constructor(private fb: FormBuilder, private auth: AuthentificationService, private router: Router) { }
 
   ngOnInit() {
     this.formUser = this.fb.group({
-      username: [''],
-      password: ['']
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
   onSubmit() {
@@ -30,6 +31,7 @@ export class ConnexionComponent implements OnInit {
         this.router.navigate(['/list']);
       },
       error => {
+        this.error = "autorisation refusée";
         console.log(error);
       }
     );

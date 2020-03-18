@@ -37,8 +37,11 @@ export class AuthentificationService {
      return this.httpClient.get<Role>(`${environment.apiUrl}/api/roles`);
    }
 
-  getUser() {
+  getUsers() {
     return this.httpClient.get<User>(`${environment.apiUrl}/api/users`);
+  }
+  getUser(id: number) {
+    return this.httpClient.get<User>(`${environment.apiUrl}/api/users/${id}`);
   }
 
   postUser(user: User) {
