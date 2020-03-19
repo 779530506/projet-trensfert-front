@@ -25,7 +25,7 @@ export class GestionUserComponent implements OnInit {
         dateNaissance: [],
         username: [],
         password: [],
-        isActive: [],
+        isActive: [true],
         role: [],
     });
 

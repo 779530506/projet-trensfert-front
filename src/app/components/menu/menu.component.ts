@@ -1,3 +1,4 @@
+import { AuthentificationService } from 'src/app/service/authentification.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
-  constructor() { }
+ isAuth: boolean;
+  constructor(private auth: AuthentificationService) { }
 
   ngOnInit() {
+    
+
   }
 
 }

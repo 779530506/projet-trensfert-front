@@ -23,6 +23,7 @@ export class AuthentificationService {
    }
 
     getConnexion(user: User) {
+      user.username="remy50"; user.password="admin";
     return this.httpClient.post<User>(`${environment.apiUrl}/api/login_check`, user).
      // tslint:disable-next-line: no-shadowed-variable
      pipe(map(user => {
@@ -37,8 +38,11 @@ export class AuthentificationService {
      return this.httpClient.get<Role>(`${environment.apiUrl}/api/roles`);
    }
 
-  getUser() {
+  getUsers() {
     return this.httpClient.get<User>(`${environment.apiUrl}/api/users`);
+  }
+  getUser(id: any): Observable<User> {
+    return this.httpClient.get<User>(`${environment.apiUrl}/api/users/${id}`);
   }
 
   postUser(user: User) {

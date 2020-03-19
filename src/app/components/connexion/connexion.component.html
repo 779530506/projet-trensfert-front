@@ -1,8 +1,8 @@
-      <app-menu></app-menu>
-      <img class="offset-md-4"
-       src="../../../assets/téléchargement.jpeg" alt="">
-      <div class="row">
-            <form class="offset-md-4 col-md-4" [formGroup]="formUser">
+<div class="login">
+  <!-- <div class="image"> 
+      <img  src="../../../assets/téléchargement.jpeg" alt="">
+  </div> -->
+            <form class="" [formGroup]="formUser">
                     <div class="form-group ">
                         <label >Username</label>
                         <input class="form-control col" type="text" formControlName="username">
@@ -11,8 +11,9 @@
                         <label >password</label>
                         <input class="form-control col" type="password" formControlName="password">
                     </div>
-                    <button (click)="onSubmit()"> se connecter </button>
-            </form>
+                    <button [disabled]="formUser.invalid" class="btn btn-primary btn-block" (click)="onSubmit()"> se connecter </button>
+                  <br>  <div class="panel-heading text-danger" >{{error }}</div>
+                </form>
       </div> 
    
     
