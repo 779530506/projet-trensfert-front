@@ -51,15 +51,18 @@ export class AuthentificationService {
     //console.log(res);
  // });
   }
-  deleteUser(user: User) {
-    // tslint:disable-next-line:quotemark
-   console.log(user.id);
+  deleteUser(user) {
      // tslint:disable-next-line: align
      return this.httpClient.delete(`${environment.apiUrl}/api/users/${user.id}`).subscribe(
       resp => {
         return this.spresp.push(resp);
         }
      );
+  }
+
+  editUser(user) {
+     // tslint:disable-next-line: align
+     return this.httpClient.put<User>(`${environment.apiUrl}/api/users/${user.id}`, user);
   }
 
 // tslint:disable-next-line: eofline

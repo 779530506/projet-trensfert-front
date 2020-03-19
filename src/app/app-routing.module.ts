@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/connexion', pathMatch: 'full' },
   { path: 'list', component: ListeUserComponent},
   { path: 'view/:id', component: ViewUserComponent},
+  {path: 'edit/:id', component: GestionUserComponent},
 
 ];
 

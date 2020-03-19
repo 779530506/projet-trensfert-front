@@ -1,4 +1,5 @@
-import { Router } from '@angular/router';
+import { User } from 'src/app/modele/user';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthentificationService } from 'src/app/service/authentification.service';
@@ -12,8 +13,9 @@ export class GestionUserComponent implements OnInit {
   formUser: FormGroup;
   roles: [];
   iri = `/api/roles/` ;
+  user: User;
 
-  constructor(private fb: FormBuilder, private auth: AuthentificationService, private router: Router) {
+  constructor(private fb: FormBuilder, private auth: AuthentificationService, private route: ActivatedRoute, private router: Router) {
    }
   ngOnInit() {
     this.formUser = this.fb.group({
@@ -36,6 +38,27 @@ export class GestionUserComponent implements OnInit {
             this.roles = data["hydra:member"];
       }
     );
+    // editer un user
+    this.route.params.subscribe(params => {
+      const id: string = params['id'];
+      this.auth.getUser(id).subscribe(
+        data => {
+          this.user = data;
+          this.formUser = this.fb.group({
+            nom: [this.user.nom],
+            prenom: [this.user.prenom],
+            email: [this.user.email],
+            adresse: [this.user.adresse],
+            telephon: [this.user.telephon],
+            dateNaissance: [this.user.dateNaissance],
+            username: [this.user.username],
+            password: [this.user.password],
+            isActive: [this.user.isActive],
+            role: [this.user.role],
+        });
+        }
+      );
+    });
   }
   onAdd() {
     const user = {
@@ -52,15 +75,23 @@ export class GestionUserComponent implements OnInit {
       isActive : this.formUser.value.isActive,
 
     };
-    // tslint:disable-next-line:quotemark
-    console.log(user);
     this.auth.postUser(user).subscribe(
       res => {
         console.log(res);
         this.router.navigate(['/list']);
 
         } );
-    //console.log(this.auth.postUser(user));
+   // tslint:disable-next-line: align
+   //if (!this.user.id) {
+    
+  //  } else {
+  //   this.auth.editUser(user).subscribe(
+  //     res => {
+  //       console.log(res);
+  //       this.router.navigate(['/list']);
+
+  //       } );
+  //  }
   }
 
 }
