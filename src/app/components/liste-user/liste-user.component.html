@@ -1,0 +1,33 @@
+<div class="offset-md-0.5 col">
+    <div class="row">
+        <div class="col-md-12"></div>
+        <a routerLink="/addUser"  class="btn btn-success offset-md-8 ">add user</a>
+        </div><br>
+         <div class="col-md-12">
+       <table class="table">
+           <thead>
+               <tr>
+                   <th>Nom</th>
+                   <th>Prenom</th>
+                   <th>Telephon</th>
+                   <th>Email</th>
+                   <th>Editer</th>
+                   <th>View</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor="let user of users">
+                   <td scope="row">{{user.nom}}</td>
+                   <td scope="row">{{user.prenom}}</td>
+                   <td scope="row">{{user.telephon}}</td>
+                   <td scope="row">{{user.email}}</td>
+                   <td><a [routerLink]="['/edit', user.id]"  class="btn btn-success"> Edit</a></td>
+                   <td><a [routerLink]="['/view', user.id]" class="btn btn-primary"> View</a></td>
+               </tr>
+
+           </tbody>
+       </table>
+         </div>
+ 
+    
+</div>  
