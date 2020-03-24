@@ -23,4 +23,21 @@ export class ListeUserComponent implements OnInit {
      }
    );
   }
+  onStatus(id) {
+    this.auth.getStatus(id).subscribe(
+      data => {
+        alert(JSON.stringify(data["message"]));
+             // tslint:disable-next-line: align
+             this.auth.getUsers().subscribe(
+              datas => {
+              this.users = datas["hydra:member"];
+             },
+            error => {
+              console.log(error);
+            }
+          );
+      }
+      );
+   
+  }
 }

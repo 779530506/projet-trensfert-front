@@ -1,3 +1,4 @@
+<h2>Creation d'un utilisateur</h2><br>
    <form [formGroup]="formUser" class="">
                <div class="form-row">
                  <div class="form-group col">
@@ -38,8 +39,9 @@
                         </select>
                       </div>
                  <div class="form-group col">
-                    <label for="dateNaissance">Compte actif</label>
-                    <input type="checkbox" class="form-control" formControlName="isActive" [defaultValue]="true"  required id="dateNaissance">
+                    <label>Compte actif</label>
+                    <input type="checkbox" class="form-control" formControlName="isActive" 
+                    [defaultValue]="true"  required >
                   </div>
               </div> 
               <div class="form-row">

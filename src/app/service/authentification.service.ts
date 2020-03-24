@@ -62,5 +62,8 @@ export class AuthentificationService {
         }
      );
   }
-
+  getStatus(id)
+  {
+    return this.httpClient.get(`${environment.apiUrl}/api/users/status/${id}`);
+  }
 }

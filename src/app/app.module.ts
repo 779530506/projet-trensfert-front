@@ -11,6 +11,7 @@ import { ConnexionComponent } from './components/connexion/connexion.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './helper/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

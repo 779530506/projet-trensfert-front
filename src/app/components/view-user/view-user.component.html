@@ -1,6 +1,8 @@
 <div class="view">
         <h2>Information générale</h2>
-         <div class="delete" ><a (click)='onDelete(user)' class="btn btn-danger">Delete</a></div> 
+         <div class="delete" >
+            <a [routerLink]="['/edit', user.id]"  class="btn btn-success"> Edit</a>-- 
+            <a (click)='onDelete(user)' class="btn btn-danger">Delete</a></div> 
            <table class="table">
             <tbody>
                 <tr>
