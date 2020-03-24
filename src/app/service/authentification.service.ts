@@ -45,11 +45,14 @@ export class AuthentificationService {
     return this.httpClient.get<User>(`${environment.apiUrl}/api/users/${id}`);
   }
 
-  postUser(user: User) {
-   return  this.httpClient.post(`${environment.apiUrl}/api/users`, user);
-   //.subscribe(res => {
-    //console.log(res);
- // });
+  postOrPutUser(user: User) {
+    // tslint:disable-next-line: curly
+    console.log(user.id);
+    if (user.id >= 1) {
+      return this.httpClient.put<User>(`${environment.apiUrl}/api/users/${user.id}`, user);
+    } else {
+          return  this.httpClient.post(`${environment.apiUrl}/api/users`, user);
+        }
   }
   deleteUser(user) {
      // tslint:disable-next-line: align
@@ -60,10 +63,4 @@ export class AuthentificationService {
      );
   }
 
-  editUser(user) {
-     // tslint:disable-next-line: align
-     return this.httpClient.put<User>(`${environment.apiUrl}/api/users/${user.id}`, user);
-  }
-
-// tslint:disable-next-line: eofline
 }

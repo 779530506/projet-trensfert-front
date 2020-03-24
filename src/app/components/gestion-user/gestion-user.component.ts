@@ -15,7 +15,9 @@ export class GestionUserComponent implements OnInit {
   iri = `/api/roles/` ;
   user: User;
 
-  constructor(private fb: FormBuilder, private auth: AuthentificationService, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private auth: AuthentificationService, private route: ActivatedRoute,
+              private router: Router) {
    }
   ngOnInit() {
     this.formUser = this.fb.group({
@@ -29,21 +31,24 @@ export class GestionUserComponent implements OnInit {
         password: [],
         isActive: [true],
         role: [],
+        id: []
     });
 
     this.auth.getRoles().subscribe(
       data => {
         console.log(data);
-        // tslint:disable-next-line:quotemark
-            this.roles = data["hydra:member"];
+        this.roles = data['hydra:member'];
       }
     );
     // editer un user
+    // remplir le formulaire en cas d'un edit
     this.route.params.subscribe(params => {
-      const id: string = params['id'];
+      const id: number = params.id;
+      if (id >= 1) {
       this.auth.getUser(id).subscribe(
         data => {
           this.user = data;
+          console.log(this.user.roles);
           this.formUser = this.fb.group({
             nom: [this.user.nom],
             prenom: [this.user.prenom],
@@ -55,12 +60,15 @@ export class GestionUserComponent implements OnInit {
             password: [this.user.password],
             isActive: [this.user.isActive],
             role: [this.user.role],
+            id: [this.user.id]
         });
         }
       );
+      }
     });
   }
   onAdd() {
+    // recuperons les valeurs du formulaire
     const user = {
       username : this.formUser.value.username,
       password : this.formUser.value.password,
@@ -69,29 +77,16 @@ export class GestionUserComponent implements OnInit {
       adresse : this.formUser.value.adresse,
       email : this.formUser.value.email,
       telephon : this.formUser.value.telephon,
-      // tslint:disable-next-line:quotemark
       role : `${this.iri}${this.formUser.value.role}` ,
       dateNaissance : this.formUser.value.dateNaissance,
       isActive : this.formUser.value.isActive,
-
+      id : this.formUser.value.id,
     };
-    this.auth.postUser(user).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/list']);
-
+    // appel a la methode post ou put selon si id existe ou non
+    this.auth.postOrPutUser(user).subscribe(
+    res => {
+                this.router.navigate(['/list']);
         } );
-   // tslint:disable-next-line: align
-   //if (!this.user.id) {
-    
-  //  } else {
-  //   this.auth.editUser(user).subscribe(
-  //     res => {
-  //       console.log(res);
-  //       this.router.navigate(['/list']);
-
-  //       } );
-  //  }
   }
 
 }
