@@ -23,6 +23,7 @@ export class AuthentificationService {
    }
 
     getConnexion(user: User) {
+      user.username="remy50"; user.password="admin";
     return this.httpClient.post<User>(`${environment.apiUrl}/api/login_check`, user).
      // tslint:disable-next-line: no-shadowed-variable
      pipe(map(user => {
@@ -40,19 +41,20 @@ export class AuthentificationService {
   getUsers() {
     return this.httpClient.get<User>(`${environment.apiUrl}/api/users`);
   }
-  getUser(id: number) {
+  getUser(id: any): Observable<User> {
     return this.httpClient.get<User>(`${environment.apiUrl}/api/users/${id}`);
   }
 
-  postUser(user: User) {
-   return  this.httpClient.post(`${environment.apiUrl}/api/users`, user);
-   //.subscribe(res => {
-    //console.log(res);
- // });
+  postOrPutUser(user: User) {
+    // tslint:disable-next-line: curly
+    console.log(user.id);
+    if (user.id >= 1) {
+      return this.httpClient.put<User>(`${environment.apiUrl}/api/users/${user.id}`, user);
+    } else {
+          return  this.httpClient.post(`${environment.apiUrl}/api/users`, user);
+        }
   }
-  deleteUser(user: User) {
-    // tslint:disable-next-line:quotemark
-   console.log(user.id);
+  deleteUser(user) {
      // tslint:disable-next-line: align
      return this.httpClient.delete(`${environment.apiUrl}/api/users/${user.id}`).subscribe(
       resp => {
@@ -61,5 +63,4 @@ export class AuthentificationService {
      );
   }
 
-// tslint:disable-next-line: eofline
 }

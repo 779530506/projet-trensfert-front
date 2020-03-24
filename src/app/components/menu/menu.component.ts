@@ -11,10 +11,7 @@ export class MenuComponent implements OnInit {
   constructor(private auth: AuthentificationService) { }
 
   ngOnInit() {
-    if (this.auth.currentUserValue.id !== null) {
-      this.isAuth = true;
-    }
-
+ 
   }
 
 }

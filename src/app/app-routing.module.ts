@@ -1,6 +1,10 @@
 import { GestionUserComponent } from './components/gestion-user/gestion-user.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
+<<<<<<< HEAD
 import { ListeUserComponent } from './page/liste-user/liste-user.component';
+=======
+import { ListeUserComponent } from './components/liste-user/liste-user.component';
+>>>>>>> dev
 import { MenuComponent } from './components/menu/menu.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,6 +18,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/connexion', pathMatch: 'full' },
   { path: 'list', component: ListeUserComponent},
   { path: 'view/:id', component: ViewUserComponent},
+<<<<<<< HEAD
+=======
+  {path: 'edit/:id', component: GestionUserComponent},
+>>>>>>> dev
 
 ];
 

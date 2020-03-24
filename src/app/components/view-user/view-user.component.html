@@ -1,42 +1,48 @@
 <div class="view">
         <h2>Information générale</h2>
-        <table class="table">
+         <div class="delete" ><a (click)='onDelete(user)' class="btn btn-danger">Delete</a></div> 
+           <table class="table">
             <tbody>
                 <tr>
+                    <td scope="row">id</td>
+                    <td>{{user.id}}</td>
+                </tr>
+                <tr>
                     <td scope="row">nom</td>
-                    <td>{{a}}</td>
+                    <td>{{user.nom}}</td>
                 </tr>
                 <tr>
                     <td>prenom</td>
-                    <td>laye</td>
+                    <td>{{user.prenom}}</td>
                 </tr>
                 <tr>
                     <td scope="row">Email</td>
-                    <td>sarr</td>
+                    <td>{{user.email}}</td>
                 </tr>
                 <tr>
                     <td>Telephone</td>
-                    <td>laye</td>
+                    <td>{{user.telephon}}</td>
                 </tr>
                 <tr>
                     <td scope="row">Etat du compte</td>
-                    <td>sarr</td>
+                    <td *ngIf="user.isActive==true">Activé</td>
+                    <td *ngIf="user.isActive==false">Desactivé</td>
                 </tr>
                 <tr>
                     <td>Role</td>
-                    <td>laye</td>
+                    <td>{{user.roles[0]}}</td>
                 </tr>
                 <tr>
                     <td scope="row">Date de naissance</td>
-                    <td>sarr</td>
+                    <td>{{user.dateNaissance}}</td>
                 </tr>
                 <tr>
                     <td>Adresse</td>
-                    <td>laye</td>
+                    <td>{{user.adresse}}</td>
                  </tr>
                  <tr>
                         <td>Username</td>
-                        <td>laye</td>
+                        <td>{{user.username}}</td>
                  </tr>
             </tbody>
         </table>
